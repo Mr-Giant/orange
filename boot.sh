@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Java ENV（此处需要修改，需要预先安装JDK）
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.9.11-0.el8_2.x86_64
-export JRE_HOME=${JAVA_HOME}/jre
+# export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.9.11-0.el8_2.x86_64
+# export JRE_HOME=${JAVA_HOME}/jre
 
 # Apps Info
 # 应用存放地址（此处需要修改）
-APP_HOME=/cvbs/fjsc/r81
+# APP_HOME=/cvbs/fjsc/r81
 # 应用名称
 APP_NAME=$1
 
@@ -38,7 +38,7 @@ start(){
         if [ $? -eq "0" ]; then
                 echo "${APP_NAME} is already running, PID=${PID}"
         else
-                nohup ${JRE_HOME}/bin/java -jar -Dloader.path=resources,lib ${APP_NAME:} >springboot.log 2>&1 &
+                nohup ${JRE_HOME}/bin/java -jar -Dloader.path=resources,lib ${APP_NAME} > springboot.log 2>&1 &
                 PID=$(echo $!)
                 echo "${APP_NAME} start success, PID=$!"
         fi
