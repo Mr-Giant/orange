@@ -1,91 +1,54 @@
 #!/bin/bash
+#这里可替换为你自己的执行程序，其他代码无需更改
+APP_NAME=web-0.0.1-SNAPSHOT.jar
 
-# Java ENV（此处需要修改，需要预先安装JDK）
-# export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.9.11-0.el8_2.x86_64
-# export JRE_HOME=${JAVA_HOME}/jre
-
-# Apps Info
-# 应用存放地址（此处需要修改）
-# APP_HOME=/cvbs/fjsc/r81
-# 应用名称
-APP_NAME=$1
-
-# Shell Info
-
-# 使用说明，用来提示输入参数
-usage() {
-    echo "Usage: sh boot [APP_NAME] [start|stop|restart|status]"
-    exit 1
-}
-
-# 检查程序是否在运行
-is_exist(){
-        # 获取PID
-        PID=$(ps -ef |grep ${APP_NAME} | grep -v $0 |grep -v grep |awk '{print $2}')
-        # -z "${pid}"判断pid是否存在，如果不存在返回1，存在返回0
-        if [ -z "${PID}" ]; then
-                # 如果进程不存在返回1
-                return 1
-        else
-                # 进程存在返回0
-                return 0
-        fi
-}
-
-# 定义启动程序函数
+#启动方法
 start(){
-        is_exist
-        if [ $? -eq "0" ]; then
-                echo "${APP_NAME} is already running, PID=${PID}"
-        else
-                nohup ${JRE_HOME}/bin/java -jar -Dloader.path=resources,lib ${APP_NAME} > springboot.log 2>&1 &
-                PID=$(echo $!)
-                echo "${APP_NAME} start success, PID=$!"
-        fi
+	pid=`ps -ef|grep $APP_NAME|grep -v grep|awk '{print $2}'`
+      	if [ "$pid" ]; then
+		echo "$APP_NAME is already running. pid=$pid ."
+	else
+                java -jar -Dloader.path=resources,lib $APP_NAME > springboot.log 2>&1 &
+		echo "$APP_NAME now is running"
+	fi
 }
-
-# 停止进程函数
+#停止方法
 stop(){
-        is_exist
-        if [ $? -eq "0" ]; then
-                kill -9 ${PID}
-                echo "${APP_NAME} process stop, PID=${PID}"
-        else
-                echo "There is not the process of ${APP_NAME}"
-        fi
+	pid=`ps -ef|grep $APP_NAME|grep -v grep|awk '{print $2}'`
+	if [ "$pid" ]; then
+		kill -9 $pid
+		echo "Pid:$pid stopped"
+	else
+		echo "$APP_NAME is not running"
+	fi
 }
-# 重启进程函数
-restart(){
-        stop
-        start
-}
-
-# 查看进程状态
+#输出运行状态
 status(){
-        is_exist
-        if [ $? -eq "0" ]; then
-                echo "${APP_NAME} is running, PID=${PID}"
-        else
-                echo "There is not the process of ${APP_NAME}"
-        fi
+	pid=`ps -ef|grep $APP_NAME|grep -v grep|awk '{print $2}'`
+	if [ "$pid" ]; then
+		echo "$APP_NAME is running. Pid is ${pid}"
+	else
+		echo "$APP_NAME is NOT running."
+	fi
 }
-
-case $2 in
-"start")
-        start
-        ;;
-"stop")
-        stop
-        ;;
-"restart")
-        restart
-        ;;
-"status")
-       status
-        ;;
-        *)
-        usage
-        ;;
+#根据输入参数，选择执行对应方法，不输入则执行使用说明
+case "$1" in
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	status)
+		status
+		;;
+	restart)
+		stop
+		sleep 5
+		start
+		;;
+	*)
+		echo "Usage:{start|stop|status|restart}"
+		;;
 esac
 exit 0
-    
