@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> 首页 </title>
+    <!-- 组件引入 -->
+    <iframe th:replace="base/base_meta.html"></iframe>
+</head>
+<body>
+<!-- 页面顶部 -->
+<iframe th:replace="base/base_top.html"></iframe>
+
+<!-- 轮播图 -->
+<iframe th:replace="base/base_carousel.html"></iframe>
+
+<!-- 导航栏 -->
+<iframe th:replace="base/base_navigation.html"></iframe>
+
+<!-- 内容主体 -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <h2>关于我</h2>
+            <h5>我的照片:</h5>
+            <div class="fakeimg">
+                <img th:src="@{images/a516b5d0192b4a1c803a33c1c94cdd30.jpg}">
+            </div>
+            <p>关于我的介绍..</p>
+            <h3>链接</h3>
+            <p>描述文本。</p>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="#">链接 1</a></li>
+                <li><a href="#">链接 2</a></li>
+                <li><a href="#">链接 3</a></li>
+            </ul>
+            <hr class="hidden-sm hidden-md hidden-lg">
+        </div>
+        <div class="col-sm-8">
+            <h2>标题</h2>
+            <h5>副标题</h5>
+            <div class="fakeimg">
+                <img th:src="@{images/9581f48b369e472fbf92ca44afe54483.jpg}">
+            </div>
+            <p>一些文本..</p>
+            <p>菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！</p>
+            <br>
+            <h2>标题</h2>
+            <h5>副标题</h5>
+            <div class="fakeimg">
+                <img th:src="@{images/9581f48b369e472fbf92ca44afe54483.jpg}">
+            </div>
+            <p>一些文本..</p>
+            <p>菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

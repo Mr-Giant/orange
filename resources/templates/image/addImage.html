@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加图片</title>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">添加图片:</label>
+        <div class="col-sm-10">
+            <input type="hidden" name="img"  id="photoUrl"/>
+            <input type="file" name="logoFile" id="logoFile" onchange="setImg(this);">
+            <span><img id="photourlShow" src="" width="300" height="197"/></span>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+
+    //用于进行图片上传，返回地址
+    function setImg(obj){
+        var f=$(obj).val();
+
+        if(f == null || f ==undefined || f == ''){
+            return false;
+        }
+
+        if(!/\.(?:png|jpg|bmp|gif|PNG|JPG|BMP|GIF)$/.test(f)) {
+            alert("类型必须是图片(.png|jpg|bmp|gif|PNG|JPG|BMP|GIF)");
+            $(obj).val('');
+            return false;
+        }
+
+        var data = new FormData();
+        $.each($(obj)[0].files,function(i,file){
+            data.append('file', file);
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/addImage/uploadImg.xhtml",
+            data: data,
+            cache: false,
+            contentType: false,    //不可缺
+            processData: false,    //不可缺
+            dataType:"json",
+            success: function(ret) {
+                console.log(ret);
+                if(ret.code==0){
+                    $("#photoUrl").val(ret.result.url);//将地址存储好
+                    $("#photourlShow").attr("src",ret.result.url);//显示图片
+                    alert(ret.message);
+                }else{
+                    alert(ret.message);
+                    $("#url").val("");
+                    $(obj).val('');
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("上传失败，请检查网络后重试");
+            }
+        });
+    }
+
+</script>

@@ -1,0 +1,63 @@
+/* 布局文件 */
+.grid{
+    padding: 20px;
+}
+
+.errorBody{
+    background-color: #efefef;
+}
+
+.errorImg{
+    width: 60%;
+    margin-left: 20%;
+    padding-top: 100px;
+}
+
+/* 图像框 */
+.headImg{
+    width: 30px;
+    height: 30px;
+    margin: -5px;
+    background-color:transparent;
+}
+
+.headName{
+    display: inline-block;
+    height: 0;
+    margin-left: 4px;
+}
+
+.topDown{
+    width: 420px;
+    height: 250px;
+}
+
+/* 透明设置 */
+.opacity{
+    opacity:0.7;
+    filter:alpha(opacity=70); /* 针对 IE8 以及更早的版本 */
+}
+
+.backgroundOpacity{
+    background-color:rgba(255,255,255,0.5);
+}
+
+/** 轮播图 **/
+.carousel-img{
+    height: 100px;
+    width: 100%;
+
+}
+
+/* 充血北京 */
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover{
+    background-color:currentColor;
+}
+
+/* 导航栏背景 */
+.main_nav_block{
+    padding: 5px;
+    border-radius:50% 0 50% 0;
+    background-color: #efefef;
+    width: 12%;
+}

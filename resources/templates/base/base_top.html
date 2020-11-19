@@ -1,0 +1,44 @@
+
+<nav class="navbar navbar-default navbar-fixed-top" style="background-color:rgba(255,255,255,0.5);border-color:rgba(255,255,255,0);" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">新书</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#">首页</a>
+                </li>
+                <li class="">
+                    <a href="#">简介</a>
+                </li>
+
+                <li class="">
+                    <a href="#">成员</a>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        更多.. <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">测试</a></li>
+                        <li><a href="#">优化</a></li>
+                        <li><a href="#">管理</a></li>
+                        <li><a href="#">投诉</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown" th:if="${user.name}">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img th:src="@{/images/head/head2.jpeg}"  class="img-circle headImg">
+                    </a>
+                    <div class="dropdown-menu topDown" style="background-color:rgba(255,255,255,0.5); top: 53px;padding: 10px 15px 10px 15px;">
+                        <img th:src="@{/images/head/head2.jpeg}"  class="img-circle headImg">
+                    </div>
+                </li>
+                <li th:if="${user.name eq null}"> <a href="/login"><b>登陆</b></a> </li>
+            </ul>
+        </div>
+    </div>
+</nav>
