@@ -2,6 +2,7 @@
 
 NGINX=/usr/local/nginx/sbin/nginx
 PID=/usr/local/nginx/logs/nginx.pid
+APP_NAME="nginx"
 
 stop(){
     pid=`ps -ef|grep $APP_NAME|grep -v grep|awk '{print $2}'`
