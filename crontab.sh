@@ -4,9 +4,10 @@ NGINX=/usr/local/nginx/sbin/nginx
 PID=/usr/local/nginx/logs/nginx.pid
 
 stop(){
-	if [ "$PID" ]; then
-		kill -9 $PID
-		echo "Pid:$PID 已经关闭!"
+    pid=`ps -ef|grep $APP_NAME|grep -v grep|awk '{print $2}'`
+	if [ "$pid" ]; then
+		kill -9 $pid
+		echo "Pid:$pid 已经关闭!"
 	else
     	echo "nginx未启动!"
 	fi
@@ -14,7 +15,8 @@ stop(){
 
 #启动方法
 start(){
-	if [ -f $PID ] 
+    pid=`ps -ef|grep $APP_NAME|grep -v grep|awk '{print $2}'`
+	if [ -f $pid ] 
 	then
 		echo "nginx已经启动!"
 	else
@@ -23,8 +25,8 @@ start(){
 	fi
 }
 
-stop();
+stop;
 echo "执行服务器Https自动更新操作!"
-start();
+start;
 
 
