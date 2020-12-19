@@ -17,7 +17,7 @@ stop(){
 #启动方法
 start(){
     pid=`ps -ef|grep $APP_NAME|grep -v grep|awk '{print $2}'`
-	if [ "$pid" ] then
+	if [ "$pid" ]; then
 		echo "nginx已经启动!"
 	else
 		$NGINX
